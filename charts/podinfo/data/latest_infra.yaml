@@ -1,0 +1,58 @@
+---
+global:
+  clusterinfo:
+    clustername: hfedev-m2
+    domain: dev.infra.webex.com
+    clusterdomain: hfedev-m2.dev.infra.webex.com
+    cloud_provider: openstack
+    service_block: inactive
+    storage_nodes: 0
+    worker_nodes: 0
+    ingress_nodes: 1
+    ingress_internal_nodes: 1
+    thousand_eyes_nodes: 0
+    optimized_storage_flavor: 8vcpu.16mem.512ssd.0eph
+    scale_limits:
+      provider-worker: 4
+      worker: 3
+    env_name: hfedev-m
+    https_internal_ips:
+      - "171.68.0.0/14"
+      - "128.107.0.0/16"
+      - "171.38.209.0/24"
+      - "192.168.5.0/24"
+      - "10.0.0.0/8"
+      - "172.27.27.128/26"
+      - "192.168.110.0/23"
+      - "192.168.24.0/24"
+      - "161.44.0.0/16"
+      - "173.36.0.0/14"
+      - "72.163.220.0/22"
+      - "64.102.0.0/16"
+      - "172.18.136.0/21"
+      - "66.114.160.0/20"
+      - "207.182.160.0/19"
+      - "64.103.0.0/16"
+      - "172.16.0.0/12"
+      - "209.197.192.0/19"
+      - "66.163.32.0/20"
+      - "216.151.128.0/19"
+      - "64.104.0.0/16"
+      - "64.68.96.0/19"
+      - "150.253.128.0/17"
+      - "170.72.0.0/16"
+      - "62.109.192.0/19"
+    mesh:
+      name: hfedev-m2-mesh
+      role: standalone
+      network: hfedev-m2
+      gatewayPort:
+    metadata:
+      annotations:
+        helm3Only: "true"
+      cluster_type: generic
+
+  repo_url: https://sqbu-github.cisco.com/cloudtools/hfedev-infra.git
+  command_and_control: hfedev
+  command_and_control_base_url: hfedev.dev.infra.webex.com
+  cloud: hfedev

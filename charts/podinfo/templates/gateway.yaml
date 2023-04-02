@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: {{ template "podinfo.fullname" . }}
+spec:
+  selector:
+    istio: {{ .Values.gateway.selector }}
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - podinfo-test.{{ .Values.global.clusterinfo.clusterdomain }}
+      tls:
+        mode: SIMPLE
+        credentialName: {{ template "podinfo.fullname" . }}-cert-secret
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ template "podinfo.fullname" . }}-cert-secret
+spec:
+  dnsNames:
+    - podinfo-test.{{ .Values.global.clusterinfo.clusterdomain }}
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: {{ template "podinfo.fullname" . }}-cert-secret
+  secretTemplate:
+    annotations:
+      kubed.appscode.com/sync: kubernetes.io/metadata.name=istio-system
+  usages:
+    - digital signature
+    - key encipherment
