@@ -1,10 +1,8 @@
-pipeline {
-    agent { docker 'python:3.5.1' }
-    stages {
-        stage('build') {
-            steps {
-                sh 'python --version'
-            }
+node('docker') {
+    checkout scm
+    stage('Build') {
+        docker.image('ruby').inside {
+            sh 'ruby --version'
         }
     }
 }
