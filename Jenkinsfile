@@ -1,11 +1,8 @@
-Jenkinsfile (Declarative Pipeline)
-pipeline {
-    agent { docker 'ruby' }
-    stages {
-        stage('build') {
-            steps {
-                sh 'ruby --version'
-            }
+node('docker') {
+    checkout scm
+    stage('Build') {
+        docker.image('ruby').inside {
+            sh 'ruby --version'
         }
     }
 }
