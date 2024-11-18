@@ -1,0 +1,19 @@
+name: Check PR Label
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-label:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check for Specific Label
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const labels = context.payload.pull_request.labels.map(label => label.name);
+          const requiredLabel = 'onboarding'; // Replace with your specific label.
+          if (!labels.includes(requiredLabel)) {
+            core.setFailed(`The pull request does not contain the required label: ${requiredLabel}`);
+          }

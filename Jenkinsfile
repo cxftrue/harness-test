@@ -1,8 +1,12 @@
-node('docker') {
-    checkout scm
-    stage('Build') {
-        docker.image('ruby').inside {
-            sh 'ruby --version'
+pipeline {
+    agent {
+        label 'built-in'
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh 'echo "jenkins hello!"'
+            }
         }
     }
 }
