@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'echo "jenkins hello"'
+                sh 'echo "jenkins hello!"'
             }
         }
     }
